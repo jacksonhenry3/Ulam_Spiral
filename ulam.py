@@ -1,7 +1,6 @@
 ## Ulam Spiral
 ## By Jackson and Kallan
-import numpy
-from numpy import *
+from numpy import array,zeros
 def numeric_spiral(n):
 	array     = zeros((n,n))
 	direction = 'right'
