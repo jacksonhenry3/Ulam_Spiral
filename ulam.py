@@ -2,11 +2,11 @@
 ## By Jackson and Kallan
 import numpy
 from numpy import *
-def numericSpiral(n):
-	array = zeros((n,n))
+def numeric_spiral(n):
+	array     = zeros((n,n))
 	direction = 'right'
-	index1 = 0
-	index2 = 0
+	index1    = 0
+	index2    = 0
 	for i in range(n**2,0,-1):
 		if direction =='right':
 			try:
@@ -17,7 +17,7 @@ def numericSpiral(n):
 				array[(index1,index2)] = i
 			except IndexError:
 				direction = 'down'
-				index2-=1
+				index2    -=1
 
 
 		if direction =='down':
@@ -67,14 +67,6 @@ def numericSpiral(n):
 						index2-=1
 	return(array)
 
-dimension = 10
-A = numericSpiral(dimension)
-
-
-
-# A=numpy.array([[5,4,3],[6,1,2],[7,8,1]])
-# print A 
-
 def not_prime(x):
 	x = int(x)
 	if x==1:
@@ -86,31 +78,32 @@ def not_prime(x):
 					return True
 
 def erradicate_non_primes(array):
-	r=array[0]
-	n=len(r)
+	r = array[0]
+	n = len(r)
 	for i in range(n):
 		for j in range(n):
 			if not_prime(array[(i,j)])==True:
-				array[(i,j)]=0
+				array[(i,j)] = 0
 	return(array)
 
-m = erradicate_non_primes(A)
-
 def gen_Ulam_data(dim):
-	Spiral=numericSpiral(dim)
-	Spiral_prime=erradicate_non_primes(Spiral)
+	sprial       = numericSpiral(dim)
+	ulam_spiral  = erradicate_non_primes(Spiral)
 	return(Spiral_prime)
 
-# print(m)
-# import numpy as np
-# import numpy.random
-# import matplotlib.pyplot as plt
 
-# # Generate some test data
-# x = np.random.randn(8873)
-# y = np.random.randn(8873)
-# heatmap, xedges, yedges = np.histogram2d(x, y, bins=(dimension,dimension))
-# extent = [xedges[0], xedges[-1], yedges[0], yedges[-1]]
-# plt.clf()
-# plt.imshow(heatmap, extent=extent)
-# plt.show()
+# ----------------- program ends -----------------
+	# experimental features
+	# print(m)
+	# import numpy as np
+	# import numpy.random
+	# import matplotlib.pyplot as plt
+
+	# # Generate some test data
+	# x = np.random.randn(8873)
+	# y = np.random.randn(8873)
+	# heatmap, xedges, yedges = np.histogram2d(x, y, bins=(dimension,dimension))
+	# extent = [xedges[0], xedges[-1], yedges[0], yedges[-1]]
+	# plt.clf()
+	# plt.imshow(heatmap, extent=extent)
+	# plt.show()
