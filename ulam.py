@@ -1,9 +1,14 @@
 ## Ulam Spiral
 ## By Jackson and Kallan
-#Hello
-from numpy import array,zeros
+from numpy import zeros
+from time import clock
+
+#the size of one edge of the array. I.E. the square root of the largest number in the spiral.
+dimension =100
+
 def numeric_spiral(n):
-	array     = zeros((n,n))
+        a = clock()
+	array     = zeros((n,n),dtype=int)
 	direction = 'right'
 	index1    = 0
 	index2    = 0
@@ -65,10 +70,11 @@ def numeric_spiral(n):
 					except IndexError:
 						direction = 'down'
 						index2-=1
+	b = clock()
+	print(b-a)
 	return(array)
 
 def not_prime(x):
-	x = int(x)
 	if x==1:
 		return True
 	if x>=2:
@@ -78,32 +84,42 @@ def not_prime(x):
 					return True
 
 def erradicate_non_primes(array):
-	r = array[0]
-	n = len(r)
-	for i in range(n):
-		for j in range(n):
-			if not_prime(array[(i,j)])==True:
-				array[(i,j)] = 0
-	return(array)
+    """
+    replaces all non-primes in a 2d array with zeros
+    """
+    r = array[0]
+    n = len(r)
+    for i in range(n):
+	for j in range(n):
+		if not_prime(array[(i,j)])==True:
+			array[(i,j)] = 0
+		else:
+		    array[(i,j)] = 1
+    return(array)
 
 def gen_Ulam_data(dim):
-	sprial       = numericSpiral(dim)
-	ulam_spiral  = erradicate_non_primes(Spiral)
-	return(Spiral_prime)
+	spiral       = numeric_spiral(dim)
+	ulam_spiral  = erradicate_non_primes(spiral)
+	return(ulam_spiral)
 
 
-# ----------------- program ends -----------------
-	# experimental features
-	# print(m)
-	# import numpy as np
-	# import numpy.random
-	# import matplotlib.pyplot as plt
 
-	# # Generate some test data
-	# x = np.random.randn(8873)
-	# y = np.random.randn(8873)
-	# heatmap, xedges, yedges = np.histogram2d(x, y, bins=(dimension,dimension))
-	# extent = [xedges[0], xedges[-1], yedges[0], yedges[-1]]
-	# plt.clf()
-	# plt.imshow(heatmap, extent=extent)
-	# plt.show()
+
+def show_Ulam_spiral(Ulam_data):
+    """
+        Plots the Ulam spiral and saves it. Depends on matplotlib.pyplot
+    """
+    from matplotlib.pyplot import set_cmap,savefig,figure,Axes
+
+    
+    fig = figure()
+    fig.set_size_inches(6, 6)
+    ax = Axes(fig, [0., 0., 1., 1.])
+    ax.set_axis_off()
+    fig.add_axes(ax)
+    set_cmap('binary')
+    ax.imshow(Ulam_data, interpolation='nearest')
+    savefig("C:/Users/Jackson/Documents/GitHub/ulamSpiral/ulam.svg",dpi = 500)
+    
+ulam_data = gen_Ulam_data(dimension)
+show_Ulam_spiral(ulam_data)
