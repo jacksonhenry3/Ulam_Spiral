@@ -1,9 +1,4 @@
-ulamSpiral
-==========
-
-an Ulam spiral generator and visualiser in python
-
-<h2>To Do</h2>
-- [ ] Add heat map visualisation using matplotlib
-- [ ] compactify spiral generator via putting cases in a function
-- [ ] add "primeyness" map. I.E. Heat map of numbers with fewest factors being hotest.
+<h2> Explanation </h2>
+This program is designed to map qualities on to a "number spiral". Starting with zero at the center you spiral out so you get something like this:
+<p><a href="http://commons.wikimedia.org/wiki/File:Ulam_spiral_howto_all_numbers.svg#mediaviewer/File:Ulam_spiral_howto_all_numbers.svg"><img width="300px" src="http://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Ulam_spiral_howto_all_numbers.svg/1200px-Ulam_spiral_howto_all_numbers.svg.png" alt="Ulam spiral howto all numbers.svg"></a><br>"<a href="http://commons.wikimedia.org/wiki/File:Ulam_spiral_howto_all_numbers.svg#mediaviewer/File:Ulam_spiral_howto_all_numbers.svg">Ulam spiral howto all numbers</a>" by <a href="//commons.wikimedia.org/w/index.php?title=User:Onmywaybackhome&amp;action=edit&amp;redlink=1" class="new" title="User:Onmywaybackhome (page does not exist)">Onmywaybackhome</a> - <span class="int-own-work">Own work</span>. Licensed under Public domain via <a href="//commons.wikimedia.org/wiki/">Wikimedia Commons</a>.</p>
+Then based on a provided function it assigns a value to the number. Then using that value it creates a heat map. That way you can explore where a property occurs. I got the idea from <a href = 'http://mathworld.wolfram.com/PrimeSpiral.html'>Ulam Spirals</a> which were the first thing i created. I also created a "primness map" where the number of prime factos corosponds to the color. This coul in princaple be used to visualize any properties of numbers, I'd love to hear youre suggestions on github :).
