@@ -4,7 +4,7 @@ from numpy import zeros
 from time import clock
 
 #the size of one edge of the array. I.E. the square root of the largest number in the spiral.
-dimension =100
+dimension =500
 
 def numeric_spiral(n):
         a = clock()
@@ -70,8 +70,6 @@ def numeric_spiral(n):
 					except IndexError:
 						direction = 'down'
 						index2-=1
-	b = clock()
-	print(b-a)
 	return(array)
 
 def not_prime(x):
@@ -95,12 +93,21 @@ def erradicate_non_primes(array):
 			array[(i,j)] = 0
 		else:
 		    array[(i,j)] = 1
-    return(array)
+
+def erradicate_non_primes(array):
+    """
+    replaces all non-primes in a 2d array with zeros
+    """
+    r = array[0]
+    n = len(r)
+    for i in range(n):
+		for j in range(n):
+				array[(i,j)] = array[(i,j)]%50
 
 def gen_Ulam_data(dim):
 	spiral       = numeric_spiral(dim)
-	ulam_spiral  = erradicate_non_primes(spiral)
-	return(ulam_spiral)
+	erradicate_non_primes(spiral)
+	return(spiral)
 
 
 
@@ -109,7 +116,7 @@ def show_Ulam_spiral(Ulam_data):
     """
         Plots the Ulam spiral and saves it. Depends on matplotlib.pyplot
     """
-    from matplotlib.pyplot import set_cmap,savefig,figure,Axes
+    from matplotlib.pyplot import set_cmap,savefig,figure,Axes,show
 
     
     fig = figure()
@@ -117,9 +124,10 @@ def show_Ulam_spiral(Ulam_data):
     ax = Axes(fig, [0., 0., 1., 1.])
     ax.set_axis_off()
     fig.add_axes(ax)
-    set_cmap('binary')
+    # set_cmap('binary')
     ax.imshow(Ulam_data, interpolation='nearest')
-    savefig("C:/Users/Jackson/Documents/GitHub/ulamSpiral/ulam.svg",dpi = 500)
+    show()
+    # savefig("ulam1.svg",dpi = 500)
     
 ulam_data = gen_Ulam_data(dimension)
 show_Ulam_spiral(ulam_data)
