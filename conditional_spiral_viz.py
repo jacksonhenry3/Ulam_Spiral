@@ -1,13 +1,8 @@
-## Ulam Spiral
-## By Jackson and Kallan
-from numpy import zeros
-from time import clock
-
-#the size of one edge of the array. I.E. the square root of the largest number in the spiral.
-dimension =500
+# Conditional Spiral Vizualizations
+# By Jackson Henry
+from numpy import zeros,sin
 
 def numeric_spiral(n):
-        a = clock()
 	array     = zeros((n,n),dtype=int)
 	direction = 'right'
 	index1    = 0
@@ -72,62 +67,57 @@ def numeric_spiral(n):
 						index2-=1
 	return(array)
 
-def not_prime(x):
-	if x==1:
-		return True
-	if x>=2:
-		for i in range(2,x):
-			if x!=i:
-				if x%i==0:
-					return True
 
-def erradicate_non_primes(array):
-    """
-    replaces all non-primes in a 2d array with zeros
-    """
+def apply_condition(array,condition):
     r = array[0]
     n = len(r)
     for i in range(n):
 	for j in range(n):
-		if not_prime(array[(i,j)])==True:
-			array[(i,j)] = 0
-		else:
-		    array[(i,j)] = 1
+	        array[(i,j)] = condition(array[(i,j)])
+    return(array)
 
-def erradicate_non_primes(array):
-    """
-    replaces all non-primes in a 2d array with zeros
-    """
-    r = array[0]
-    n = len(r)
-    for i in range(n):
-		for j in range(n):
-				array[(i,j)] = array[(i,j)]%50
-
-def gen_Ulam_data(dim):
+def gen_spiral_data(dim,condition):
 	spiral       = numeric_spiral(dim)
-	erradicate_non_primes(spiral)
-	return(spiral)
+	ulam_spiral  = apply_condition(spiral,condition)
+	return(ulam_spiral)
 
 
 
 
-def show_Ulam_spiral(Ulam_data):
-    """
-        Plots the Ulam spiral and saves it. Depends on matplotlib.pyplot
-    """
-    from matplotlib.pyplot import set_cmap,savefig,figure,Axes,show
-
+def show_spiral(data):
+    from matplotlib.pyplot import imshow,show,figure,Axes,set_cmap
     
+    #this is to remove plat axes
     fig = figure()
     fig.set_size_inches(6, 6)
     ax = Axes(fig, [0., 0., 1., 1.])
     ax.set_axis_off()
     fig.add_axes(ax)
-    # set_cmap('binary')
-    ax.imshow(Ulam_data, interpolation='nearest')
+    set_cmap('binary')
+    #display plot
+    ax.imshow(data, interpolation='nearest')
     show()
-    # savefig("ulam1.svg",dpi = 500)
     
-ulam_data = gen_Ulam_data(4)
-show_Ulam_spiral(ulam_data)
+def largest_smallest_divisor(x):
+    for i in range(2,x):
+        if x%i ==0:
+            return(i)
+    return(1)
+    
+def s(x):
+    return(5*sin(x/10))
+
+def happy(n):
+    visited = set()
+    while 1:
+        if n == 1:
+            return(1)
+            break
+        n = sum(int(c) ** 2 for c in str(n))
+        if n in visited:
+            return(0)
+            break
+        visited.add(n)
+
+data = gen_spiral_data(50,happy)
+show_spiral(data)
